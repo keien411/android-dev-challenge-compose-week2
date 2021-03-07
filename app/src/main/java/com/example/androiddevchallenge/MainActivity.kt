@@ -61,7 +61,6 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-
 import com.example.androiddevchallenge.ui.theme.MyTheme
 import java.util.Date
 import java.util.Timer
@@ -81,9 +80,7 @@ class MainActivity : AppCompatActivity() {
 
 @ExperimentalAnimationApi
 @Composable
-fun HelloInput(
-
-) {
+fun HelloInput() {
     Column {
         var isStart by remember { mutableStateOf(true) }
 
@@ -104,14 +101,20 @@ fun HelloInput(
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
         )
 
-        Button(onClick = {
-            val task = MyTimerTask(textState.value.text.toInt(), textState, startFun = {
-                isStart = it
-            })
+        Button(
+            onClick = {
+                val task = MyTimerTask(
+                    textState.value.text.toInt(), textState,
+                    startFun = {
+                        isStart = it
+                    }
+                )
 
-            Timer().schedule(task, Date(), 1000)
-            isStart = false
-        }, modifier = defaultModifier, enabled = isStart) {
+                Timer().schedule(task, Date(), 1000)
+                isStart = false
+            },
+            modifier = defaultModifier, enabled = isStart
+        ) {
             Text(text = "开始")
         }
 
@@ -146,7 +149,6 @@ fun HelloInput(
             )
         )
 
-
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -164,9 +166,7 @@ fun HelloInput(
                 )
 
             )
-
         }
-
     }
 }
 
